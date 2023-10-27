@@ -1,0 +1,139 @@
+{
+	"info": {
+		"_postman_id": "f22d706d-6aba-41e4-bfd1-5203b1669568",
+		"name": "ExtraFeeGraphql",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get extra fee list",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "{\n  extraFee(entity_id: 2) {\n    entity_id\n    title\n    paymentmethod\n    extra_fee\n    status\n    created_at\n    updated_at\n  }\n}\n",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/graphql",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get extra fee on cart detail",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJraWQiOiIxIiwiYWxnIjoiSFMyNTYifQ.eyJ1aWQiOjE0LCJ1dHlwaWQiOjMsImlhdCI6MTY5NTI4NDAwOCwiZXhwIjoxNjk1Mjg3NjA4fQ.CjiL7OdUEikgNP_7BOq5DQAEsoYLM_bf45XON8rUkIU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "{\n  cart(cart_id: \"6pZ2Vj992zu8rESiEC1m9kFDFYo9WnXZ\") {\n    email\n    extra_fee{\n        title\n        extra_fee\n    }\n    billing_address {\n      city\n      country {\n        code\n        label\n      }\n      firstname\n      lastname\n      postcode\n      region {\n        code\n        label\n      }\n      street\n      telephone\n    }\n    shipping_addresses {\n      firstname\n      lastname\n      street\n      city\n      region {\n        code\n        label\n      }\n      country {\n        code\n        label\n      }\n      telephone\n      available_shipping_methods {\n        amount {\n          currency\n          value\n        }\n        available\n        carrier_code\n        carrier_title\n        error_message\n        method_code\n        method_title\n        price_excl_tax {\n          value\n          currency\n        }\n        price_incl_tax {\n          value\n          currency\n        }\n      }\n      selected_shipping_method {\n        amount {\n          value\n          currency\n        }\n        carrier_code\n        carrier_title\n        method_code\n        method_title\n      }\n    }\n    items {\n      uid\n      id\n      product {\n        name\n        sku\n      }\n      \n      quantity\n      ... on SimpleCartItem {\n          customizable_options {\n            label\n            values {\n              value\n              label\n            }\n          }\n      }\n    }\n    available_payment_methods {\n      code\n      title\n    }\n    selected_payment_method {\n      code\n      title\n    }\n    applied_coupons {\n      code\n    }\n    prices {\n      grand_total {\n        value\n        currency\n      }\n    }\n  }\n}\n",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/graphql",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Empty cart for Cart Id",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "{\n  customerCart{\n    id\n  }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/graphql",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "customer token",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation {\n  generateCustomerToken(\n    email: \"pruthvi.raval@indianic.com\"\n    password: \"admin@123\"\n  ) {\n    token\n  }\n}\n",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/graphql",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "system_config",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "{ \n    storeConfig {\n        extra_fee_enable\n    }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/graphql",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,27 @@
+type Query {
+    extraFee(entity_id: Int!): ExtraFee @resolver(class: "\\MageINIC\\ExtraFeeGraphql\\Model\\Resolver\\ExtraFee")
+}
+
+type ExtraFee {
+    entity_id: Int @doc(description: "Extra Fee Id")
+    title: String @doc(description: "Extra Fee Title")
+    paymentmethod: String @doc(description: "Extra Fee Payment Method")
+    extra_fee: Float @doc(description: "Extra Fee")
+    status: Int @doc(description: "Extra Fee Status")
+    created_at: String @doc(description: "Extra Fee Created At")
+    updated_at: String @doc(description: "Extra Fee Updated At")
+}
+
+type StoreConfig {
+    extra_fee_enable: String @doc(description: "Enable Functionality")
+}
+
+type Cart {
+    extra_fee: CartExtraFee @resolver(class: "MageINIC\\ExtraFeeGraphql\\Model\\Resolver\\CartDetailsExtraFee")
+     @doc(description: "Add Extra Fee on Cart Details")
+}
+
+type CartExtraFee {
+    title: String @doc(description: "Title")
+    extra_fee: Float @doc(description: "Extra Fee")
+}
